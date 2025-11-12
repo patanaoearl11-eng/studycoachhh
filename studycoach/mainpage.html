@@ -55,14 +55,14 @@
   <!-- ✅ Navbar -->
   <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-blue-700">StudyCoach</h1>
+      <h1 class="text-2xl font-bold text-blue-500">StudyCoach</h1>
       <ul class="flex space-x-8 items-center">
-        <li><a href="#about" class="hover:text-blue-700 font-medium">About</a></li>
-        <li><a href="#activities" class="hover:text-blue-700 font-medium">Activities</a></li>
-        <li><a href="#contact" class="hover:text-blue-700 font-medium">Contact</a></li>
+        <li><a href="#about" class="hover:text-blue-700 font-small">About</a></li>
+        <li><a href="#activities" class="hover:text-blue-700 font-small">Activities</a></li>
+        <li><a href="#contact" class="hover:text-blue-700 font-small">Contact</a></li>
         <!-- ✅ Added Sign In button -->
         <li>
-          <a href="login.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition">
+          <a href="login.html" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition">
             Sign In
           </a>
         </li>
@@ -141,28 +141,32 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="flex flex-col md:flex-row items-center justify-between py-20 px-10 md:px-20 text-white">
-    <div class="mb-10 md:mb-0 md:w-1/2">
-      <h2 class="text-3xl font-bold mb-6">Reach out</h2>
-      <p class="font-semibold uppercase text-blue-300 mb-2">Mailing Address</p>
-      <p class="mb-4 text-white">Cabambangan, Bacolor<br>Pampanga, Philippines</p>
+ <!-- Contact Section -->
+<section id="contact" class="flex flex-col md:flex-row items-center justify-between py-20 px-10 md:px-20 text-white">
+  <div class="mb-10 md:mb-0 md:w-1/2">
+    <h2 class="text-3xl font-bold mb-6">Reach out</h2>
 
-      <p class="font-semibold uppercase text-blue-300 mb-2">Email Address</p>
-      <p class="mb-4 text-white">studycoach@gmail.com</p>
+    <p class="font-semibold uppercase text-blue-300 mb-2">Mailing Address</p>
+    <p class="mb-4 text-white">Cabambangan, Bacolor<br>Pampanga, Philippines</p>
 
-      <p class="font-semibold uppercase text-blue-300 mb-2">Phone Number</p>
-      <p class="text-white">09853748264</p>
+    <p class="font-semibold uppercase text-blue-300 mb-2">Email Address</p>
+    <p class="mb-4 text-white">studycoach@gmail.com</p>
+
+    <p class="font-semibold uppercase text-blue-300 mb-2">Phone Number</p>
+    <p class="text-white mb-8">09853748264</p>
+
+    <!-- ✅ New "Meet the Developers" Button -->
+    <a href="developers.html" 
+       class="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+       Meet the Developers
+    </a>
+  </div>
+
+  <div class="relative md:w-1/2 text-center">
+    <img src="contactbg.jpg" alt="Sky roof" class="rounded-lg shadow-lg">
+    <div class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
+      <h3 class="text-2xl font-bold">Ready to elevate education?</h3>
     </div>
-
-    <div class="relative md:w-1/2 text-center">
-      <img src="contactbg.jpg" alt="Sky roof" class="rounded-lg shadow-lg">
-      <div class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
-        <h3 class="text-2xl font-bold">Ready to elevate education?</h3>
-      </div>
-    </div>
-  </section>
-
-</body>
-</html>
+  </div>
+</section>
 
