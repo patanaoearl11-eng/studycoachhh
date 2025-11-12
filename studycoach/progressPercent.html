@@ -1,0 +1,111 @@
+<?php
+session_start();
+$subject = 'Python'; 
+$qfile = __DIR__ . '/questions.xml';  // Changed to .xml for proper XML loading; rename your file accordingly
+$xml = simplexml_load_file($qfile);
+
+$sub = null;
+foreach ($xml->subject as $s) {
+    if ((string)$s['name'] === $subject) { $sub = $s; break; }
+}
+if (!$sub) die('No questions for this subject.');
+
+// Handle POST submission for scoring
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $answers = $_POST;
+    unset($answers['subject']);  // Remove non-answer fields
+    $correct = 0;
+    $total = count($answers);
+    $recommendations = [];
+    
+    foreach ($answers as $qid => $selected) {
+        $qid = str_replace('q_', '', $qid);  // Remove 'q_' prefix
+        $question = $sub->xpath("question[@id='$qid']")[0];
+        $correctOption = null;
+        foreach ($question->option as $opt) {
+            if (isset($opt['correct']) && (string)$opt['correct'] === 'true') {
+                $correctOption = (string)$opt['label'];  // Assuming options have 'label' attribute like 'a', 'b', etc.
+                break;
+            }
+        }
+        if ($selected === $correctOption) {
+            $correct++;
+        } else {
+            $rec = (string)$question->recommendationIfWrong;
+            if ($rec) $recommendations[] = $rec;
+        }
+    }
+    $percent = $total > 0 ? round(($correct / $total) * 100) : 0;
+    
+    header('Content-Type: application/json');
+    echo json_encode([
+        'correct' => $correct,
+        'total' => $total,
+        'percent' => $percent,
+        'recommendations' => $recommendations
+    ]);
+    exit;
+}
+?>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><?=$subject?> - Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-10 bg-gray-900 text-white">
+  <h1 class="text-3xl"><?=$subject?> - Multiple Choice</h1>
+  <form id="quizForm">
+    <?php $i=0; foreach ($sub->question as $q): $i++; ?>
+      <div class="p-4 mt-4 bg-gray-800 rounded">
+        <p class="font-semibold">Q<?=$i?>. <?=htmlspecialchars((string)$q->text)?></p>
+        <?php foreach (['a','b','c','d'] as $opt): ?>
+          <?php
+            $optText = '';
+            foreach ($q->option as $o) {
+                if ((string)$o['label'] === $opt) {
+                    $optText = (string)$o;
+                    break;
+                }
+            }
+            if (!$optText) continue;
+          ?>
+          <label style="display:block;margin-top:.4rem">
+            <input type="radio" name="q_<?=htmlspecialchars((string)$q['id'])?>" value="<?=$opt?>" required> <?=htmlspecialchars($optText)?>
+          </label>
+        <?php endforeach; ?>
+      </div>
+    <?php endforeach; ?>
+
+    <div class="mt-6">
+      <button type="button" id="submitBtn" class="px-6 py-2 bg-blue-600 rounded">Submit</button>
+    </div>
+  </form>
+
+  <div id="result" class="mt-6 hidden bg-gray-800 p-4 rounded"></div>
+
+<script>
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const form = document.getElementById('quizForm');
+  const formData = new FormData(form);
+  formData.append('subject', '<?=addslashes($subject)?>');
+  const res = await fetch(window.location.href, { method: 'POST', body: formData });  // Fetch to same URL for POST handling
+  const data = await res.json();
+  const result = document.getElementById('result');
+  result.classList.remove('hidden');
+  result.innerHTML = `<p><strong>Score:</strong> ${data.correct}/${data.total} (${data.percent}%)</p>`;
+  result.innerHTML += `<div style="background:#333;padding:6px;border-radius:6px;margin-top:6px">
+    <div style="width:${data.percent}%;background:#3b82f6;padding:6px;border-radius:4px;color:black;font-weight:600">${data.percent}%</div></div>`;
+
+  if (data.recommendations && data.recommendations.length) {
+    result.innerHTML += '<h3 style="margin-top:8px">Recommended lessons to review:</h3><ul>';
+    data.recommendations.forEach(r => result.innerHTML += `<li>${r}</li>`);
+    result.innerHTML += '</ul>';
+  } else {
+    result.innerHTML += '<p style="margin-top:8px">Great job — no recommendations!</p>';
+  }
+});
+</script>
+</body>
+</html>

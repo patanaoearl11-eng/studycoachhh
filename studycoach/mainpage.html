@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Coach</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    #about img {
+      width: 100%;
+      height: 50vh;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    #activities .card {
+      background: none;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    #activities .card:hover {
+      transform: scale(1.02);
+    }
+
+    #activities img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+
+    #activities {
+      background-color: #97A6B4;
+    }
+
+    #contact {
+      background-color: #7B8B9D;
+    }
+
+    #contact img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-900">
+
+  <!-- ✅ Navbar -->
+  <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-700">StudyCoach</h1>
+      <ul class="flex space-x-8 items-center">
+        <li><a href="#about" class="hover:text-blue-700 font-medium">About</a></li>
+        <li><a href="#activities" class="hover:text-blue-700 font-medium">Activities</a></li>
+        <li><a href="#contact" class="hover:text-blue-700 font-medium">Contact</a></li>
+        <!-- ✅ Added Sign In button -->
+        <li>
+          <a href="login.html" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition">
+            Sign In
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ✅ Hero Section (Removed Get Started Button) -->
+  <section id="home" class="relative h-screen flex items-center justify-start bg-cover bg-center" style="background-image: url('mainbg.jpg');">
+    <div class="bg-black/40 absolute inset-0"></div>
+    <div class="relative z-10 text-white px-10 md:px-20">
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-4">STUDY COACH</h1>
+      <p class="text-lg tracking-wide mb-6">ELEVATING EDUCATION</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="flex flex-col md:flex-row h-screen w-full">
+    <div class="w-full md:w-1/2 h-full">
+      <div class="w-full h-full bg-cover bg-center" style="background-image: url('abtpage.jpg');"></div>
+    </div>
+
+    <div class="w-full md:w-1/2 bg-[#7a6244] text-white flex flex-col justify-center p-10 md:p-16">
+      <h2 class="text-5xl font-extrabold mb-6 leading-tight">
+        Gearing up<br>for the future
+      </h2>
+      <p class="mb-4 leading-relaxed text-lg">
+        A study companion that helps students prepare for exams faster and easier. It can turn notes, documents, and lets them choose quiz styles they prefer like identification, multiple choice, or true-or-false, while tracking topics they need to improve on.
+      </p><br><br><br>
+      <p class="mb-10 leading-relaxed text-lg">
+        With the increasing demands of modern education, students often face the challenge of balancing multiple subjects, deadlines, and learning resources. StudyCoach provides a smarter, more efficient way to prepare for exams.
+      </p>
+      <a href="#activities" class="bg-[#b9a48b] hover:bg-[#c3b29d] text-white font-semibold px-8 py-3 rounded-full w-fit">
+        SEE MORE
+      </a>
+    </div>
+  </section>
+
+  <!-- Activity Lineup -->
+  <section id="activities" class="py-20 px-10 md:px-20 bg-[#94A3B8] flex flex-col justify-center h-screen">
+    <h2 class="text-4xl font-bold mb-12 text-center text-white">Activity Lineup</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      <!-- Problem -->
+      <div class="card bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col items-center">
+        <div class="w-full h-72 bg-gray-100 flex justify-center items-center">
+          <img src="problempic.jpg" alt="Problem" class="w-full h-full object-contain">
+        </div>
+        <div class="p-6 bg-white text-center">
+          <h2 class="text-blue-700 font-semibold mb-2">PROBLEM</h2>
+          <p class="text-gray-1000">Disorganization consumes valuable time that should be spent on actual learning.</p>
+        </div>
+      </div>
+
+      <!-- Solution -->
+      <div class="card bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col items-center">
+        <div class="w-full h-72 bg-gray-100 flex justify-center items-center">
+          <img src="solutionpic.jpg" alt="Solution" class="w-full h-full object-contain">
+        </div>
+        <div class="p-6 bg-white text-center">
+          <h2 class="text-blue-700 font-semibold mb-2">SOLUTION</h2>
+          <p class="text-gray-1000">Saves valuable study time and ensures learning becomes more focused and effective.</p>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="card bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col items-center">
+        <div class="w-full h-72 bg-gray-100 flex justify-center items-center">
+          <img src="resultpic.jpg" alt="Results" class="w-full h-full object-contain">
+        </div>
+        <div class="p-6 bg-white text-center">
+          <h2 class="text-blue-700 font-semibold mb-2">RESULTS</h2>
+          <p class="text-gray-1000">StudyCoach is not just a tool, but a reliable companion that supports students in achieving academic success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="flex flex-col md:flex-row items-center justify-between py-20 px-10 md:px-20 text-white">
+    <div class="mb-10 md:mb-0 md:w-1/2">
+      <h2 class="text-3xl font-bold mb-6">Reach out</h2>
+      <p class="font-semibold uppercase text-blue-300 mb-2">Mailing Address</p>
+      <p class="mb-4 text-white">Cabambangan, Bacolor<br>Pampanga, Philippines</p>
+
+      <p class="font-semibold uppercase text-blue-300 mb-2">Email Address</p>
+      <p class="mb-4 text-white">studycoach@gmail.com</p>
+
+      <p class="font-semibold uppercase text-blue-300 mb-2">Phone Number</p>
+      <p class="text-white">09853748264</p>
+    </div>
+
+    <div class="relative md:w-1/2 text-center">
+      <img src="contactbg.jpg" alt="Sky roof" class="rounded-lg shadow-lg">
+      <div class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
+        <h3 class="text-2xl font-bold">Ready to elevate education?</h3>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
+

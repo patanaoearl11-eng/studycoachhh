@@ -1,0 +1,83 @@
+<?php
+session_start();
+
+// Ensure user is logged in
+if (!isset($_SESSION['user'])) {
+  header("Location: login.php");
+  exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StudyCoach | Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(180deg, #0a1a3a, #0d1e4a);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .btn {
+      background: linear-gradient(90deg, #1e90ff, #6a5acd);
+      padding: 0.6rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #3a6fff, #7b68ee);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center py-10">
+
+  <div class="absolute top-6 right-6">
+    <a href="logout.php" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-xl shadow-lg transition">
+      Logout
+    </a>
+  </div>
+
+  <h1 class="text-4xl font-bold text-blue-400 mb-8">📚 Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</h1>
+  <p class="text-gray-300 mb-12 text-center max-w-xl">
+    Track your progress, stay motivated, and keep your study streak alive with StudyCoach.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-11/12 md:w-3/4 text-center">
+
+    <div class="card">
+      <h2 class="text-2xl font-bold text-blue-300 mb-4">Daily Planner</h2>
+      <p class="text-gray-400 mb-6">Organize your study sessions effectively.</p>
+      <a href="#" class="btn">Open Planner</a>
+    </div>
+
+    <div class="card">
+      <h2 class="text-2xl font-bold text-blue-300 mb-4">Progress Tracker</h2>
+      <p class="text-gray-400 mb-6">View your recent study progress and stats.</p>
+      <a href="#" class="btn">View Progress</a>
+    </div>
+
+    <div class="card">
+      <h2 class="text-2xl font-bold text-blue-300 mb-4">Achievements</h2>
+      <p class="text-gray-400 mb-6">See your unlocked achievements and streaks.</p>
+      <!-- ✅ This button opens achievements.php in a new page -->
+      <a href="achievements.php" class="btn">View Achievements</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
